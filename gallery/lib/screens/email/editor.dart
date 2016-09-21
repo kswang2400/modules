@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:models/email/message.dart';
 import 'package:widgets/email/editor_action_bar_header.dart';
+import 'package:widgets/email/editor_recipient_field_input.dart';
 
 /// This screen displays an Google Inbox style email editor.
 class EmailEditorScreen extends StatefulWidget {
@@ -35,6 +36,13 @@ class _EmailEditorScreenState extends State<EmailEditorScreen> {
               onSend: _onPerformMessageAction,
               onClose: _onPerformMessageAction,
               onAttach: _onPerformMessageAction,
+            ),
+            new EditorRecipientFieldInput(
+              recipientList: <String>['Coco Yang'],
+              inputLabel: 'To:',
+              onRecipientsChanged: (List<String> recipients) {
+                print(recipients);
+              },
             ),
           ],
         ),
