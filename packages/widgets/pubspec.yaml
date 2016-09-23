@@ -5,6 +5,10 @@ dependencies:
     path: ../../../sysui/third_party/flutter/packages/flutter
   models:
     path: ../models
+  keyboard:
+    path: ../../../sysui/keyboard
+  sysui_widgets:
+    path: ../../../sysui/widgets
 dev_dependencies:
   test: any
   flutter_test:

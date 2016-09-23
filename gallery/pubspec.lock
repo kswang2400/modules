@@ -19,6 +19,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0"
+  keyboard:
+    description:
+      path: "../../sysui/keyboard"
+      relative: true
+    source: path
+    version: "0.0.0"
   meta:
     description:
       name: meta
@@ -61,6 +67,12 @@ packages:
       relative: true
     source: path
     version: "0.0.99"
+  sysui_widgets:
+    description:
+      path: "../../sysui/widgets"
+      relative: true
+    source: path
+    version: "0.0.0"
   util:
     description:
       path: "../packages/util"

@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:sysui_widgets/raw_keyboard_input.dart';
+import 'package:keyboard/keyboard.dart';
 
 /// Callback type for updating the recipients of a new message
 typedef void RecipientsChangedCallback(List<String> recipientList);
@@ -49,34 +51,49 @@ class _EditorRecipientFieldInputState extends State<EditorRecipientFieldInput> {
   List<String> _recipientList;
 
   /// The 'in progress' text of the new recipient being composed in the input
-  String newRecipient;
+  InputValue _currentInput;
+
+  String newRecipientText;
 
   @override
   void initState() {
     super.initState();
-    newRecipient = '';
+    _currentInput = const InputValue();
     _recipientList = new List<String>.from(config.recipientList);
+    newRecipientText = '';
   }
 
   void _handleInputChange(InputValue input) {
     // TODO(dayang): If current newRecipient text is a valid email address,
     // automatically add it to the recipientList.
-    print(input.text);
     setState(() {
-      newRecipient = input.text;
+      _currentInput = input;
+    });
+  }
+
+  void _handleTextChange(String text) {
+    setState(() {
+      newRecipientText = text;
     });
   }
 
   void _handleInputSubmit(InputValue input) {
-    // TODO(dayang): Actually to check to make sure that text input is a
-    // email address.
+    // TODO(dayang): Email validation + cleanup (white spaces)
     if(input.text.isNotEmpty) {
       setState(() {
-        _recipientList.add(input.text);
-        newRecipient = '';
+        if(!_recipientList.contains(input.text)) {
+          _recipientList.add(input.text);
+        }
+        _currentInput = const InputValue();
         config.onRecipientsChanged(_recipientList);
       });
     }
+  }
+
+  void _removeRecipient(String recipient) {
+    setState(() {
+      _recipientList.remove(recipient);
+    });
   }
 
   @override
@@ -85,7 +102,12 @@ class _EditorRecipientFieldInputState extends State<EditorRecipientFieldInput> {
     List<Widget> rowChildren = <Widget>[
       new Flexible(
         flex: null,
-        child: new Text(config.inputLabel),
+        child: new Text(
+          config.inputLabel,
+          style: new TextStyle(
+            color: Colors.grey[500],
+          ),
+        ),
       ),
     ];
 
@@ -93,26 +115,41 @@ class _EditorRecipientFieldInputState extends State<EditorRecipientFieldInput> {
     _recipientList.forEach((String recipient) {
       rowChildren.add(new Flexible(
         flex: null,
-        child: new Chip(
-          label: new Text(recipient),
+        child: new Container(
+          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: new Chip(
+            label: new Text(recipient),
+            onDeleted: () {
+              _removeRecipient(recipient);
+            },
+          ),
         ),
       ));
     });
 
     //add text input
     rowChildren.add(new Flexible(
-      flex: 1,
+      flex: null,
       child: new Input(
         onChanged: _handleInputChange,
         onSubmitted: _handleInputSubmit,
-        value: new InputValue(text: newRecipient),
+        value: _currentInput,
       ),
+      // child: new Container(
+      //   width: 100.0,
+      //   height: 20.0,
+      //   child: new RawKeyboardInput(
+      //     onTextChanged: _handleTextChange,
+      //     focused: true,
+      //   ),
+      // ),
     ));
 
     return new Container(
-      child: new Row(
-        children: rowChildren,
-      ),
+      child:   new Row(
+          children: rowChildren,
+        ),
     );
+
   }
 }

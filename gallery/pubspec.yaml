@@ -7,3 +7,7 @@ dependencies:
     path: ../packages/models
   widgets:
     path: ../packages/widgets
+  keyboard:
+    path: ../../sysui/keyboard
+  sysui_widgets:
+    path: ../../sysui/widgets
