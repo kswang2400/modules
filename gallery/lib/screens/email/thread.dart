@@ -43,6 +43,9 @@ class _EmailThreadScreenState extends State<EmailThreadScreen> {
         thread: _mockThread,
         expandedMessageIds: _expandedMessages,
         onSelectMessage: _onSelectMessage,
+        onForwardMessage: _onPerformMessageAction,
+        onReplyAllMessage: _onPerformMessageAction,
+        onReplyMessage: _onPerformMessageAction,
         footer: new MessageActionBarFooter(
           message: _mockThread.messages.last,
           onForwardMessage: _onPerformMessageAction,
