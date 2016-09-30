@@ -134,7 +134,7 @@ void main() {
               message: message,
               onForward: (Message m) {},
               onReply: (Message m) {
-                // debugPrintStack(label: 'tap!!');
+                debugPrintStack(label: 'tap!!');
                 expect(m, message);
                 taps++;
                 expect(taps, 1);
