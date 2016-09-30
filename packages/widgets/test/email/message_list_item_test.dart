@@ -7,7 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:models/email/message.dart';
 import 'package:widgets/email/message_content.dart';
 import 'package:widgets/email/message_list_item.dart';
-import 'package:widgets/email/type_defs.dart';
 
 void main() {
   String profileUrl =
@@ -135,7 +134,7 @@ void main() {
               message: message,
               onForward: (Message m) {},
               onReply: (Message m) {
-                print('tap!!');
+                // debugPrintStack(label: 'tap!!');
                 expect(m, message);
                 taps++;
                 expect(taps, 1);
@@ -157,6 +156,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('Reply'), findsOneWidget);
     await tester.tap(find.text('Reply'));
+    await tester.pump(const Duration(seconds: 1));
     await tester.pump(const Duration(seconds: 1));
     print("final result: $taps");
     expect(taps, 1);
