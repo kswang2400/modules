@@ -156,7 +156,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('Reply'), findsOneWidget);
     await tester.tap(find.text('Reply'));
-    await tester.pump(const Duration(seconds: 1));
+    print('HANGGGED!!');
     await tester.pump(const Duration(seconds: 1));
     print("final result: $taps");
     expect(taps, 1);
