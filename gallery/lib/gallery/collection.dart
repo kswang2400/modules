@@ -38,4 +38,11 @@ final List<GalleryItem> kGalleryCollection = <GalleryItem>[
     href: '/email/menu',
     builder: (BuildContext context) => new EmailMenuScreen(),
   ),
+  new GalleryItem(
+    title: 'Email - Animations',
+    subtitle: 'Playground for Animations',
+    group: GalleryGroups.screen,
+    href: '/email/animations',
+    builder: (BuildContext context) => new AnimationScreen(),
+  ),
 ];
