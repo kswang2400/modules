@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:models/email/attachment.dart';
 import 'package:models/email/mailbox.dart';
 import 'package:models/email/message.dart';
 import 'package:models/email/thread.dart';
@@ -103,5 +104,57 @@ void main() {
       ],
     );
     expect(thread.getSubject(), '(No Subject)');
+  });
+
+  test(
+      'getAllAttachments() should return a list of all attachments of all '
+      'messsages in thread ', () {
+    Attachment attachment1 = new Attachment(id: '1');
+    Attachment attachment2 = new Attachment(id: '2');
+    Attachment attachment3 = new Attachment(id: '1');
+    Thread thread = new Thread(
+      id: '1',
+      messages: <Message>[
+        new Message(
+          sender: new Mailbox(
+            address: 'cocoyang@cu.te',
+            displayName: 'Coco Yang',
+          ),
+          recipientList: <Mailbox>[
+            new Mailbox(
+              address: 'david@ya.ng',
+              displayName: 'David Yang',
+            )
+          ],
+          subject: 'Feed Me!!!',
+          text: "Woof Woof. I'm so hungry. You need to feed me!",
+          timestamp: new DateTime.now(),
+          isRead: true,
+          attachments: <Attachment>[attachment1],
+        ),
+        new Message(
+          sender: new Mailbox(
+            address: 'cocoyang@cu.te',
+            displayName: 'Coco Yang',
+          ),
+          recipientList: <Mailbox>[
+            new Mailbox(
+              address: 'david@ya.ng',
+              displayName: 'David Yang',
+            )
+          ],
+          subject: 'PLEAZE Feed Me!!!',
+          text: "Woof Woof. I'm so hungry. You need to feed me!",
+          timestamp: new DateTime.now(),
+          isRead: true,
+          attachments: <Attachment>[attachment2, attachment3],
+        ),
+      ],
+    );
+    Iterable<Attachment> attachments = thread.attachments;
+    expect(attachments.length, 3);
+    expect(attachments.contains(attachment1), true);
+    expect(attachments.contains(attachment2), true);
+    expect(attachments.contains(attachment3), true);
   });
 }
