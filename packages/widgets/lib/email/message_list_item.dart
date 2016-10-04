@@ -108,7 +108,6 @@ class MessageListItem extends StatelessWidget {
                 ),
               ],
               onSelected: (MessageActionCallback messageCallback) {
-                print(messageCallback);
                 messageCallback(message);
               }
             ),

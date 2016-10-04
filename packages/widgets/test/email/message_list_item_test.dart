@@ -119,7 +119,9 @@ void main() {
       isRead: true,
     );
 
-    int taps = 0;
+    int forwardTaps = 0;
+    int replyTaps = 0;
+    int replayAllTaps = 0;
 
     await tester.pumpWidget(new StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
@@ -132,23 +134,46 @@ void main() {
           home: new Material(
             child:  new MessageListItem(
               message: message,
-              onForward: (Message m) {},
-              onReply: (Message m) {
-                debugPrintStack(label: 'tap!!');
-                expect(m, message);
-                taps++;
-                expect(taps, 1);
-                print(taps);
+              onForward: (Message m) {
+                // [expect] statements currently silently fail in this callback
+                // waiting on https://github.com/flutter/flutter/pull/6203
+                // to get merged to Flutter which will fix this issue
+                // TODO(dayang): Put back check for correct message being passed
+                // through callback once Flutter issue is fixed.;
+                forwardTaps++;
               },
-              onReplyAll: (Message m) {},
+              onReply: (Message m) {
+                replyTaps++;
+              },
+              onReplyAll: (Message m) {
+                replayAllTaps++;
+              },
               isExpanded: true,
             ),
           ),
         );
     }));
 
-    expect(taps, 0);
-    // Open Popup Menu
+    expect(forwardTaps, 0);
+    expect(replyTaps, 0);
+    expect(replayAllTaps, 0);
+
+    // Open Popup Menu and tap 'Forward'
+    await tester.tap(find.byWidgetPredicate(
+        (Widget widget) => widget is Icon && widget.icon == Icons.more_vert));
+    // finish the menu animation
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('Forward'), findsOneWidget);
+    await tester.tap(find.text('Forward'));
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(forwardTaps, 1);
+    expect(replyTaps, 0);
+    expect(replayAllTaps, 0);
+
+    // Open Popup Menu and tap 'Reply'
     await tester.tap(find.byWidgetPredicate(
         (Widget widget) => widget is Icon && widget.icon == Icons.more_vert));
     // finish the menu animation
@@ -156,9 +181,26 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     expect(find.text('Reply'), findsOneWidget);
     await tester.tap(find.text('Reply'));
-    print('HANGGGED!!');
     await tester.pump(const Duration(seconds: 1));
-    print("final result: $taps");
-    expect(taps, 1);
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(forwardTaps, 1);
+    expect(replyTaps, 1);
+    expect(replayAllTaps, 0);
+
+    // Open Popup Menu and tap 'ReplyAll'
+    await tester.tap(find.byWidgetPredicate(
+        (Widget widget) => widget is Icon && widget.icon == Icons.more_vert));
+    // finish the menu animation
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('Reply All'), findsOneWidget);
+    await tester.tap(find.text('Reply All'));
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(forwardTaps, 1);
+    expect(replyTaps, 1);
+    expect(replayAllTaps, 1);
   });
 }
