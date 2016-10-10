@@ -15,8 +15,9 @@
 /// Configuration data for the Google APIs.
 const Map<String, String> kConfig = const <String, String>{
   /// Client ID for the GoogleAPI project.
-  'client_id': null,
+  'client_id':
+      '732972632604-ld034vagbi5atm8s36f33o67s1giibom.apps.googleusercontent.com',
 
   /// Client secret for the GoogleAPI project.
-  'client_secret': null,
+  'client_secret': '45AHXrQVazpNtHtNI-OQ7RKo',
 };
