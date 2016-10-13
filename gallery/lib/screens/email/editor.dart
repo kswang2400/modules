@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:models/email/message.dart';
 import 'package:widgets/email/editor_action_bar_header.dart';
 
+import 'package:widgets/youtube/youtube_player.dart';
+
 /// This screen displays an Google Inbox style email editor.
 class EmailEditorScreen extends StatefulWidget {
   /// Creates a [EmailEditorScreen] instance.
@@ -28,6 +30,9 @@ class _EmailEditorScreenState extends State<EmailEditorScreen> {
             onSend: _onPerformMessageAction,
             onClose: _onPerformMessageAction,
             onAttach: _onPerformMessageAction,
+          ),
+          new YoutubePlayer(
+            videoId: 'etzp_UgiZK8',
           ),
         ],
       ),
