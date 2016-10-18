@@ -45,11 +45,10 @@ class ContactDetailsScreen extends StatelessWidget {
     Widget contactDetails = new ContactDetails(
       contact: contact,
     );
-    new Theme(
+    return new Theme(
       data: contactTheme,
       isMaterialAppTheme: false,
       child: contactDetails,
     );
-    return contactDetails;
   }
 }
