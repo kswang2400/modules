@@ -38,11 +38,18 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
   /// Youtube provides 4 thumbnails (0,1,2,3)
   int _thumbnailIndex = 0;
 
+  const Duration _kSlideDuration = const Duration(seconds:1);
+
 
   void _togglePlay() {
     setState(() {
       _playing = !_playing;
     });
+  }
+
+  void _play() {
+    // do timer stuff here
+    return new T
   }
 
   String _getCurrentThumbnailURL() {
@@ -51,30 +58,33 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
 
   /// Overlay widget that contains playback controls
   Widget _buildControlOverlay() {
+
     return new Container(
       decoration: new BoxDecoration(
-        // backgroundColor: const Color.fromARGB(240, 0, 0, 0),
         gradient: new RadialGradient(
           center: FractionalOffset.center,
           colors: <Color>[
-            const Color.fromARGB(30, 0, 0, 0),
-            const Color.fromARGB(200, 0, 0, 0),
-            const Color.fromARGB(200, 0, 0, 0),
+            const Color.fromRGBO(0, 0, 0, 0.1),
+            const Color.fromRGBO(0, 0, 0, 0.7),
+            const Color.fromRGBO(0, 0, 0, 1.0),
           ],
           stops: <double>[
             0.0,
             0.7,
             1.0,
           ],
-          radius: 50.0,
+          radius: 1.0,
         ),
       ),
-      child: new Center(
-        child: new IconButton(
-          icon: new Icon(Icons.play_arrow),
-          size: 60.0,
-          onPressed: _togglePlay,
-          color: Colors.white,
+      child: new Material(
+        color: const Color.fromRGBO(0, 0, 0, 0.0),
+        child: new Center(
+          child: new IconButton(
+            icon: new Icon(Icons.play_arrow),
+            size: 60.0,
+            onPressed: _togglePlay,
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -82,8 +92,6 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
 
   @override
   Widget build(BuildContext context) {
-
-    /// TODO(dayang): user Offstage Widget to hide and show
     return new Container(
       width: 250.0,
       height: 250.0,
