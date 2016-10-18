@@ -65,18 +65,24 @@ void main() {
     expect(callTaps, 0);
     expect(emailTaps, 0);
     expect(textTaps, 0);
-    await tester.tap(find.byWidgetPredicate(
-        (Widget widget) => widget is Icon && widget.icon == Icons.phone));
+    await tester.tap(find
+        .byWidgetPredicate(
+            (Widget widget) => widget is Icon && widget.icon == Icons.phone)
+        .first);
     expect(callTaps, 1);
     expect(emailTaps, 0);
     expect(textTaps, 0);
-    await tester.tap(find.byWidgetPredicate(
-        (Widget widget) => widget is Icon && widget.icon == Icons.message));
+    await tester.tap(find
+        .byWidgetPredicate(
+            (Widget widget) => widget is Icon && widget.icon == Icons.message)
+        .first);
     expect(callTaps, 1);
     expect(emailTaps, 0);
     expect(textTaps, 1);
-    await tester.tap(find.byWidgetPredicate(
-        (Widget widget) => widget is Icon && widget.icon == Icons.email));
+    await tester.tap(find
+        .byWidgetPredicate(
+            (Widget widget) => widget is Icon && widget.icon == Icons.email)
+        .first);
     expect(callTaps, 1);
     expect(emailTaps, 1);
     expect(textTaps, 1);
@@ -119,18 +125,24 @@ void main() {
     expect(callTaps, 0);
     expect(emailTaps, 0);
     expect(textTaps, 0);
-    await tester.tap(find.byWidgetPredicate(
-        (Widget widget) => widget is Icon && widget.icon == Icons.phone));
+    await tester.tap(find
+        .byWidgetPredicate(
+            (Widget widget) => widget is Icon && widget.icon == Icons.phone)
+        .first);
     expect(callTaps, 0);
     expect(emailTaps, 0);
     expect(textTaps, 0);
-    await tester.tap(find.byWidgetPredicate(
-        (Widget widget) => widget is Icon && widget.icon == Icons.message));
+    await tester.tap(find
+        .byWidgetPredicate(
+            (Widget widget) => widget is Icon && widget.icon == Icons.message)
+        .first);
     expect(callTaps, 0);
     expect(emailTaps, 0);
     expect(textTaps, 0);
-    await tester.tap(find.byWidgetPredicate(
-        (Widget widget) => widget is Icon && widget.icon == Icons.email));
+    await tester.tap(find
+        .byWidgetPredicate(
+            (Widget widget) => widget is Icon && widget.icon == Icons.email)
+        .first);
     expect(callTaps, 0);
     expect(emailTaps, 0);
     expect(textTaps, 0);
