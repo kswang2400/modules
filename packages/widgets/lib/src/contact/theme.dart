@@ -8,4 +8,5 @@ import 'package:flutter/material.dart';
 ThemeData contactTheme = new ThemeData(
   primarySwatch: Colors.orange,
   primaryColor: Colors.orange[700],
+  buttonColor: Colors.orange[700],
 );

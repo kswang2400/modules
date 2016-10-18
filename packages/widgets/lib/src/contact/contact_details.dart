@@ -8,6 +8,7 @@ import 'package:models/contact.dart';
 
 import '../user/alphatar.dart';
 import 'type_defs.dart';
+import 'theme.dart';
 
 const String _kDefaultBackgroundImage =
     'https://static.pexels.com/photos/2042/sea-city-mountains-landmark.jpg';
@@ -194,6 +195,9 @@ class ContactDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    print(theme.primaryColor);
+    print(Colors.orange[700]);
+    print(contactTheme.primaryColor);
     return new CustomMultiChildLayout(
       delegate: new _ContactLayoutDelegate(),
       children: <Widget>[

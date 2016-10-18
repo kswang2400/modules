@@ -47,7 +47,7 @@ class ContactDetailsScreen extends StatelessWidget {
     );
     new Theme(
       data: contactTheme,
-      isMaterialAppTheme: true,
+      isMaterialAppTheme: false,
       child: contactDetails,
     );
     return contactDetails;
