@@ -42,13 +42,13 @@ class ContactDetailsScreen extends StatelessWidget {
         ),
       ],
     );
-    Widget contactDetails = new ContactDetails(
-      contact: contact,
-    );
+    // Apply the ContactTheme to the ContactDetails Widget
     return new Theme(
       data: contactTheme,
       isMaterialAppTheme: false,
-      child: contactDetails,
+      child:  new ContactDetails(
+        contact: contact,
+      ),
     );
   }
 }
