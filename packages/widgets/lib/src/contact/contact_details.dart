@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:models/contact.dart';
 
 import '../user/alphatar.dart';
+import 'phone_entry_group.dart';
 import 'type_defs.dart';
 
 const String _kDefaultBackgroundImage =
@@ -208,6 +209,12 @@ class ContactDetails extends StatelessWidget {
               children: <Widget>[
                 _buildNameHeader(),
                 _buildQuickActionButtonRow(theme),
+                new Container(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: new PhoneEntryGroup(
+                    phoneEntries: contact.phoneNumbers,
+                  ),
+                ),
               ],
             ),
           ),
